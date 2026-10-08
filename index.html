@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>National Academy — Mock Test Portal</title>
+<style>
+:root{--b:#1a00d1;--bs:#ebe8ff;--ink:#0c1a45;--m:#5b6585;--l:#dfe3ef;--bg:#f4f6fb;--ok:#13804a;--er:#b3261e}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.5 system-ui,Segoe UI,sans-serif}
+header{display:flex;align-items:center;gap:12px;padding:10px 20px;background:#fff;border-bottom:1px solid var(--l)}
+header img{width:38px;height:38px;border-radius:50%}header b{font-size:17px}header .sp{flex:1}
+main{max-width:980px;margin:0 auto;padding:24px 16px}
+.card{background:#fff;border:1px solid var(--l);border-radius:14px;padding:22px;margin-bottom:16px}
+h2{margin:0 0 12px;font-size:22px}h3{margin:0 0 8px}
+input,select,textarea,button{font:inherit}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--l);border-radius:8px;margin:4px 0 12px;background:#fff}
+textarea{min-height:140px;font-family:monospace;font-size:13px}
+label{font-weight:600;font-size:13px}
+button{background:var(--b);color:#fff;border:0;border-radius:8px;padding:10px 18px;cursor:pointer;font-weight:600}
+button.g{background:var(--bs);color:var(--b)}button.r{background:#fde8e6;color:var(--er)}
+button:disabled{opacity:.45;cursor:not-allowed}
+.row{display:flex;gap:12px;flex-wrap:wrap}.row>*{flex:1;min-width:150px}
+.tabs{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}.tabs button{background:#fff;color:var(--ink);border:1px solid var(--l)}.tabs button.on{background:var(--b);color:#fff}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{padding:8px;border-bottom:1px solid var(--l);text-align:left}th{color:var(--m);font-size:12px;text-transform:uppercase}
+.tag{padding:2px 10px;border-radius:99px;font-size:12px;font-weight:700;background:var(--bs);color:var(--b)}.tag.live{background:#dff5e8;color:var(--ok)}.tag.end{background:#eee;color:var(--m)}
+.err{color:var(--er);min-height:20px}.muted{color:var(--m);font-size:13px}
+#ck{position:fixed;left:0;right:0;bottom:0;background:var(--ink);color:#fff;padding:14px 20px;display:flex;gap:16px;align-items:center;flex-wrap:wrap;z-index:9}#ck p{flex:1;margin:0;min-width:240px}
+.exam{display:grid;grid-template-columns:1fr 230px;gap:16px}@media(max-width:760px){.exam{grid-template-columns:1fr}}
+.opt{display:block;padding:12px;border:1.5px solid var(--l);border-radius:10px;margin:8px 0;cursor:pointer;font-weight:400}.opt.s{border-color:var(--b);background:var(--bs)}
+.pal{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}.pal button{padding:8px 0;background:#fff;color:var(--ink);border:1px solid var(--l)}.pal .a{background:var(--ok);color:#fff;border-color:var(--ok)}.pal .c{outline:3px solid var(--b)}
+.timer{font:700 22px monospace;color:var(--b)}.ca{color:var(--ok);font-weight:700}.wa{color:var(--er);font-weight:700}
+.sel{display:flex;gap:8px;align-items:center}
+.qc{border:1px solid var(--l);border-radius:10px;padding:12px;margin:10px 0;background:#fff}.ro{padding:6px 10px;border-radius:8px;margin:4px 0}.ro.ok{background:#dff5e8}.ro.no{background:#fde8e6}
+.phd{display:flex;align-items:center;gap:14px;border-bottom:3px solid var(--b);padding-bottom:10px;margin-bottom:12px}.phd img{width:64px;height:64px;border-radius:50%}.pfoot{display:none}
+*{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+@media print{header,#ck,.noprint{display:none!important}body{background:#fff}main{padding:0;max-width:none}.qc{break-inside:avoid}.pfoot{display:block;position:fixed;bottom:0;left:0;right:0;text-align:center;font-size:11px;color:#555;border-top:1px solid #ccc;padding:4px;background:#fff}#rv{padding-bottom:34px}}
+.pp{display:grid;grid-template-columns:1fr 330px;gap:16px;align-items:start}.pdfp{max-height:84vh;overflow:auto;padding:8px;background:#e9ecf4}.pdfp canvas{width:100%;display:block;margin:0 0 8px;border:1px solid var(--l);background:#fff}.oms{position:sticky;top:8px;max-height:84vh;overflow:auto}.orow{display:flex;align-items:center;gap:6px;margin:6px 0}.orow b{width:38px;font-size:13px}.bub{width:38px;height:38px;border-radius:50%;padding:0;background:#fff;color:var(--ink);border:1.5px solid var(--l)}.bub.on{background:var(--b);color:#fff;border-color:var(--b)}.ptabs{display:none;gap:8px;margin:10px 0}.fkey{min-height:90px}
+@media(max-width:760px){.pp{grid-template-columns:1fr}.ptabs{display:flex}.ptabs button.on{background:var(--b);color:#fff}.pp.sh .pdfp{display:none}.pp:not(.sh) .oms{display:none}.oms{position:static;max-height:none}.pdfp{max-height:78vh}}
+</style><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.58.0/dist/umd/supabase.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script></head><body>
+<header><img src="logo.png" alt=""><div><b>National Academy</b><div class="muted">Mock Test Portal · JEE / NEET</div></div><div class="sp"></div><span id="who" class="muted"></span> <button class="g" id="lo" style="display:none">Logout</button></header>
+<main id="app"></main>
+<div id="ck" style="display:none"><p>We use cookies to keep you signed in and to save your test progress. Please accept to continue.</p><button id="ok">Accept cookies</button></div>
+<script>
+// ---- Config: only the PUBLIC publishable key goes here. Never put the secret / service-role key in this file. ----
+const SB_URL='https://cpxrkjlbjiroldbizwrz.supabase.co',SB_KEY='sb_publishable_kFURS1nZDnZvBGmf639-EQ_VfvLyd6l';
+const sb=supabase.createClient(SB_URL,SB_KEY);
+const $=s=>document.querySelector(s),esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+if(window.pdfjsLib)pdfjsLib.GlobalWorkerOptions.workerSrc='https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js';
+// Answer key text -> [{n,type,answer,tol}]. Formats: 1-B  2:C  3=A,C  21-5.5  22-4±0.1  (also "1. B" / "1) B")
+function parseKey(t){const out=[],err=[];
+ t=String(t||'').replace(/(\d+)\s*[.)]\s*(?=[A-Da-d](?![A-Za-z0-9.]))/g,'$1-').replace(/\s*([-:=])\s*/g,'$1').replace(/\s*(±|\+-|\+\/-)\s*/g,'±');
+ for(const tok of t.split(/[\s;]+/).filter(Boolean)){
+  const m=tok.match(/^(\d+)[-:=](.+)$/);if(!m){err.push('Cannot read "'+tok+'"');continue}
+  const n=+m[1],a=m[2];
+  if(/^[A-Da-d]([,+]?[A-Da-d])*$/.test(a)){const L=[...new Set(a.toUpperCase().replace(/[^A-D]/g,'').split(''))].sort();out.push({n,type:'mcq',answer:L.join(',')})}
+  else{const q=a.match(/^(-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)(?:±(\d+(?:\.\d+)?))?$/);if(!q){err.push('Bad answer for Q'+n+': "'+a+'"');continue}out.push({n,type:'num',answer:q[1],tol:q[2]?+q[2]:0})}}
+ const seen={};out.forEach(o=>{if(seen[o.n])err.push('Q'+o.n+' appears twice');seen[o.n]=1});
+ out.sort((x,y)=>x.n-y.n);return{items:out,errors:err}}
+const Q=async p=>{const{data,error}=await p;if(error)throw new Error(error.message);return data};
+const go=async f=>{try{await f()}catch(e){alert(e.message)}};
+const consent=()=>localStorage.getItem('na_cookie')==='1'||document.cookie.includes('na_cookie=1');
+const fmt=t=>new Date(t).toLocaleString([],{dateStyle:'medium',timeStyle:'short'});
+const sEmail=r=>r.trim().toLowerCase().replace(/[^a-z0-9._-]/g,'')+'@students.nationalacademy.in';
+let me=null,tab='students',timer=null,lr='student',reg=false,cur=0,lq={subject:'Physics',exam_type:'BOTH'};
+$('#ok').onclick=()=>{localStorage.setItem('na_cookie','1');document.cookie='na_cookie=1;max-age=31536000;path=/;SameSite=Lax';$('#ck').style.display='none'};
+$('#lo').onclick=async()=>{clearInterval(timer);timer=null;await sb.auth.signOut();me=null;render()};
+async function detect(uid){
+ const a=await sb.from('admin_profiles').select('full_name,is_active').eq('id',uid).maybeSingle();
+ if(a.data&&a.data.is_active)return{role:'admin',id:uid,name:a.data.full_name};
+ const s=await sb.from('students').select('id,full_name,is_active').eq('auth_user_id',uid).maybeSingle();
+ if(s.data&&s.data.is_active)return{role:'student',id:s.data.id,name:s.data.full_name};return null}
+async function boot(){$('#ck').style.display=consent()?'none':'flex';
+ try{const{data}=await sb.auth.getSession();if(data.session&&consent()){me=await detect(data.session.user.id);if(!me)await sb.auth.signOut()}}catch(e){}
+ render()}
+function render(){clearInterval(timer);timer=null;$('#who').textContent=me?me.name:'';$('#lo').style.display=me?'':'none';
+ if(!me)return login();me.role=='admin'?admin():stu().catch(e=>$('#app').innerHTML='<div class="card err">'+esc(e.message)+'</div>')}
+// ---- Login / registration ----
+function login(){const adm=lr=='admin';
+ $('#app').innerHTML=`<div class="card" style="max-width:440px;margin:30px auto"><h2>${reg?'Student registration':'Sign in'}</h2>
+ <div class="tabs"><button data-r="student" class="${adm?'':'on'}">Student</button><button data-r="admin" class="${adm?'on':''}">Admin</button></div>
+ <label>${adm?'Admin email':'Roll number'}</label><input id="u" autocomplete="username">
+ ${reg&&!adm?'<label>Access code (given by your teacher)</label><input id="cd" inputmode="numeric">':''}
+ <label>${reg&&!adm?'Create a password (min 6 characters)':'Password'}</label><input id="p" type="password" autocomplete="current-password">
+ <div class="err" id="e"></div><button id="go" style="width:100%">${reg&&!adm?'Register & continue':'Login'}</button>
+ ${adm?'':`<p class="muted" style="text-align:center"><a href="#" id="tg">${reg?'Already registered? Login':'First time? Register here'}</a></p>`}</div>`;
+ document.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{lr=b.dataset.r;reg=false;login()});
+ if($('#tg'))$('#tg').onclick=e=>{e.preventDefault();reg=!reg;login()};
+ const err=m=>$('#e').textContent=m;
+ $('#go').onclick=async()=>{if(!consent())return err('Please accept cookies first.');
+  const u=$('#u').value.trim(),p=$('#p').value;if(!u||!p)return err('Fill all fields.');$('#go').disabled=true;
+  try{
+   if(adm){const{error}=await sb.auth.signInWithPassword({email:u,password:p});if(error)throw new Error('Wrong email or password.')}
+   else if(reg){const cd=$('#cd').value.trim();if(!cd)throw new Error('Enter your access code.');if(p.length<6)throw new Error('Password must be at least 6 characters.');
+    const r=await sb.auth.signUp({email:sEmail(u),password:p});
+    if(r.error||!r.data.session){const s2=await sb.auth.signInWithPassword({email:sEmail(u),password:p});if(s2.error)throw new Error(r.error?'Could not register: '+r.error.message:'Registration needs "Confirm email" turned OFF in Supabase Auth settings.')}
+    const{error}=await sb.rpc('claim_student',{p_roll:u,p_code:cd});if(error){await sb.auth.signOut();throw new Error(error.message)}}
+   else{const{error}=await sb.auth.signInWithPassword({email:sEmail(u),password:p});if(error)throw new Error('Wrong roll number or password.')}
+   const{data}=await sb.auth.getSession();me=await detect(data.session.user.id);
+   if(!me){await sb.auth.signOut();throw new Error(adm?'This account is not an admin.':'This account is not linked to a student.')}
+   render()}catch(e){err(e.message);$('#go').disabled=false}}}
+// ---- Admin shell ----
+function admin(){const T=[['students','Students'],['questions','Questions'],['exams','Exams'],['results','Results & Answer Key']];
+ $('#app').innerHTML=`<div class="tabs">${T.map(t=>`<button data-t="${t[0]}" class="${tab==t[0]?'on':''}">${t[1]}</button>`).join('')}</div><div id="v" class="muted">Loading…</div>`;
+ document.querySelectorAll('[data-t]').forEach(b=>b.onclick=()=>{tab=b.dataset.t;admin()});
+ ({students:aStu,questions:aQues,exams:aExams,results:aRes})[tab]().catch(e=>$('#v').innerHTML='<div class="card err">'+esc(e.message)+'</div>')}
+async function aStu(){
+ const[bs,st,cl]=await Promise.all([Q(sb.from('batches').select('id,name,target_exam,academic_year').order('created_at',{ascending:false})),Q(sb.from('students').select('id,roll_number,full_name,auth_user_id,batch_id').order('created_at',{ascending:false})),Q(sb.from('student_claims').select('student_id,code'))]);
+ const bn=Object.fromEntries(bs.map(b=>[b.id,b.name])),cm=Object.fromEntries(cl.map(c=>[c.student_id,c.code]));
+ $('#v').innerHTML=`<div class="card"><h3>1. Create a batch</h3><div class="row"><div><label>Batch name</label><input id="bn" placeholder="JEE Dropper 2026"></div><div><label>Exam</label><select id="be"><option>JEE</option><option>NEET</option><option>MHT-CET</option></select></div><div><label>Academic year</label><input id="by" value="2026-27"></div></div><button id="ab">Add batch</button></div>
+ <div class="card"><h3>2. Add a student</h3><div class="row"><div><label>Name</label><input id="n"></div><div><label>Roll number</label><input id="r"></div><div><label>Batch</label><select id="b">${bs.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></div></div><button id="as">Add student &amp; get access code</button>
+ <p class="muted">Give the student their roll number and the 6-digit access code. They use "First time? Register here" to set their own password.</p></div>
+ <div class="card"><table><tr><th>Name</th><th>Roll</th><th>Batch</th><th>Status</th></tr>${st.map(s=>`<tr><td>${esc(s.full_name)}</td><td>${esc(s.roll_number)}</td><td>${esc(bn[s.batch_id]||'')}</td><td>${s.auth_user_id?'<span class="tag live">Registered</span>':'Access code: <b>'+esc(cm[s.id]||'-')+'</b>'}</td></tr>`).join('')||'<tr><td colspan=4 class="muted">No students yet.</td></tr>'}</table></div>`;
+ $('#ab').onclick=()=>go(async()=>{const name=$('#bn').value.trim();if(!name)throw new Error('Enter a batch name.');await Q(sb.from('batches').insert({name,target_exam:$('#be').value,academic_year:$('#by').value.trim(),created_by:me.id}));aStu()});
+ $('#as').onclick=()=>go(async()=>{if(!$('#b').value)throw new Error('Create a batch first.');await Q(sb.rpc('admin_add_student',{p_roll:$('#r').value,p_name:$('#n').value,p_batch:$('#b').value}));aStu()})}
+async function aQues(){
+ const qs=await Q(sb.from('admin_question_bank').select('id,subject,exam_type,question_type,question_text,option_a,option_b,option_c,option_d,correct_answer,numerical_answer').order('created_at',{ascending:false}).limit(100));
+ const so=['Physics','Chemistry','Mathematics','Biology'],num=lq.type=='numerical';
+ $('#v').innerHTML=`<div class="card"><h3>Add question to bank</h3><div class="row"><div><label>Question type</label><select id="qt"><option value="mcq_single">MCQ (one correct option)</option><option value="numerical" ${num?'selected':''}>Numerical value</option></select></div><div><label>Subject</label><select id="qs">${so.map(x=>`<option ${x==lq.subject?'selected':''}>${x}</option>`).join('')}</select></div><div><label>For exam</label><select id="qe">${['BOTH','JEE','NEET'].map(x=>`<option ${x==lq.exam_type?'selected':''}>${x}</option>`).join('')}</select></div><div><label>Chapter (optional)</label><input id="qc"></div></div>
+ <label>Question (multi-line allowed)</label><textarea id="qq" style="min-height:90px;font-family:inherit;font-size:15px"></textarea>
+ <div id="mc" style="display:${num?'none':''}"><div class="row"><div><label>Option A</label><input id="oa"></div><div><label>Option B</label><input id="ob"></div><div><label>Option C</label><input id="oc"></div><div><label>Option D</label><input id="od"></div></div><div class="row"><div><label>Correct answer</label><select id="ck2"><option>A</option><option>B</option><option>C</option><option>D</option></select></div></div></div>
+ <div id="nu" style="display:${num?'':'none'}"><div class="row"><div><label>Correct numerical answer</label><input id="na" type="number" step="any"></div><div><label>Allowed ± tolerance (0 = exact)</label><input id="nt" type="number" step="any" value="0"></div></div></div>
+ <label>Solution / explanation (optional — printed in the student's answer PDF)</label><textarea id="ex" style="min-height:60px;font-family:inherit"></textarea>
+ <button id="aq">+ Save question</button></div>
+ <div class="card"><h3>Question bank (latest ${qs.length})</h3>${qs.map(x=>`<div style="display:flex;gap:10px;border-top:1px solid var(--l);padding:8px 0"><div style="flex:1"><span class="tag">${x.subject}</span> <span class="tag end">${x.exam_type}</span> <span class="tag end">${x.question_type=='numerical'?'Numerical':'MCQ'}</span> <span style="white-space:pre-wrap">${esc(x.question_text)}</span><div class="muted">${x.question_type=='numerical'?'Answer: <b class="ca">'+esc(x.numerical_answer)+'</b>':'A. '+esc(x.option_a)+' · B. '+esc(x.option_b)+' · C. '+esc(x.option_c)+' · D. '+esc(x.option_d)+' — <b class="ca">'+esc(x.correct_answer)+'</b>'}</div></div><button class="r" data-d="${x.id}">Delete</button></div>`).join('')||'<span class="muted">No questions yet.</span>'}</div>`;
+ $('#qt').onchange=()=>{const n=$('#qt').value=='numerical';$('#mc').style.display=n?'none':'';$('#nu').style.display=n?'':'none'};
+ $('#aq').onclick=()=>go(async()=>{const n=$('#qt').value=='numerical';lq={subject:$('#qs').value,exam_type:$('#qe').value,type:n?'numerical':'mcq_single'};
+  const p={question_type:lq.type,subject:lq.subject,exam_type:lq.exam_type,chapter:$('#qc').value,question_text:$('#qq').value,explanation:$('#ex').value};
+  if(n){p.numerical_answer=$('#na').value;p.numeric_tolerance=$('#nt').value||0}else Object.assign(p,{option_a:$('#oa').value,option_b:$('#ob').value,option_c:$('#oc').value,option_d:$('#od').value,correct_answer:$('#ck2').value});
+  await Q(sb.rpc('admin_save_question',{p_q:p}));aQues()});
+ document.querySelectorAll('[data-d]').forEach(b=>b.onclick=()=>go(async()=>{if(!confirm('Delete this question?'))return;await Q(sb.rpc('admin_delete_question',{p_id:b.dataset.d}));aQues()}))}
+async function aExams(){
+ const[bs,ex]=await Promise.all([Q(sb.from('batches').select('id,name')),Q(sb.from('exams').select('id,title,exam_type,status,start_at,end_at,duration_minutes,batch_id,paper_path').order('created_at',{ascending:false}))]);
+ const SUB=[['Physics','sp'],['Chemistry','sc'],['Mathematics','sm'],['Biology','sbi']];
+ $('#v').innerHTML=`<div class="card"><h3>Create exam from PDF paper + answer key</h3>
+<p class="muted">Upload the question paper PDF and type/paste the answer key. Students read the PDF on screen and fill an OMR-style answer sheet. Grading is automatic.</p>
+<div class="row"><div><label>Title</label><input id="pt"></div><div><label>Type</label><select id="pty"><option value="JEE_MAIN">JEE Main</option><option value="NEET">NEET</option><option value="CUSTOM">Custom</option></select></div><div><label>Batch</label><select id="pb"><option value="">All batches</option>${bs.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></div></div>
+<div class="row"><div><label>Opens at</label><input id="ps" type="datetime-local"></div><div><label>Closes at (hard end time)</label><input id="pe" type="datetime-local"></div><div><label>Duration (min)</label><input id="pd" type="number" value="180"></div></div>
+<label>Question paper (PDF, max 50 MB)</label><input id="pf" type="file" accept="application/pdf">
+<label>Questions per subject, in the same order as the paper (0 = skip)</label><div class="row">${[['Physics','25'],['Chemistry','25'],['Mathematics','25'],['Biology','0']].map(([s,v],i)=>`<div><label class="muted">${s}</label><input id="pq${i}" type="number" min="0" value="${v}"></div>`).join('')}</div>
+<div class="row"><div><label>+ marks per question</label><input id="pm" type="number" value="4"></div><div><label>− marks (MCQ)</label><input id="pn" type="number" value="1"></div><div><label>− marks (Numerical)</label><input id="pz" type="number" value="0"></div></div>
+<label>Answer key</label><textarea id="pk" placeholder="1-B 2-C 3-A,C 4-D&#10;21-5.5 22-4±0.1&#10;(one answer per question number; letters for MCQ, a number for numerical, ±tolerance optional)"></textarea>
+<div id="pv" class="muted"></div><div class="err" id="pe2"></div><button id="pmk">Create paper exam (draft)</button></div>
+<div class="card"><h3>Create exam</h3><div class="row"><div><label>Title</label><input id="xt"></div><div><label>Type</label><select id="xy"><option value="JEE_MAIN">JEE Main</option><option value="NEET">NEET</option><option value="CUSTOM">Custom</option></select></div><div><label>Batch</label><select id="xb"><option value="">All batches</option>${bs.map(b=>`<option value="${b.id}">${esc(b.name)}</option>`).join('')}</select></div></div>
+ <div class="row"><div><label>Opens at</label><input id="xs" type="datetime-local"></div><div><label>Closes at (hard end time)</label><input id="xe" type="datetime-local"></div><div><label>Duration (min)</label><input id="xd" type="number" value="180"></div></div>
+ <label>Questions per subject (0 = skip)</label><div class="row">${SUB.map(([s,i])=>`<div><label class="muted">${s}</label><div class="sel"><input id="${i}m" type="number" min="0" value="0" title="MCQ"><input id="${i}n" type="number" min="0" value="0" title="Numerical"></div><div class="muted" style="font-size:11px;margin-top:-8px">MCQ &nbsp;|&nbsp; Numerical</div></div>`).join('')}</div>
+ <div class="row"><div><label>+ marks per question</label><input id="xp" type="number" value="4"></div><div><label>− marks (MCQ)</label><input id="xn" type="number" value="1"></div><div><label>− marks (Numerical)</label><input id="xz" type="number" value="0"></div></div>
+ <button class="g" id="jp">JEE Main preset: 20 MCQ + 5 numerical in Physics, Chemistry, Maths</button> <button id="mk">Create draft</button>
+ <p class="muted">Questions are picked at random per student from your bank (by subject, exam and type). Inside each subject MCQs come first, then numericals. The test closes for everyone at the hard end time and students cannot submit early. Check the negative marking for numericals against your official pattern.</p></div>
+ <div class="card"><h3>All exams</h3><table><tr><th>Title</th><th>Window</th><th>Min</th><th>Status</th><th></th></tr>${ex.map(e=>`<tr><td>${esc(e.title)}<div class="muted">${e.exam_type}${e.paper_path?' · PDF paper':''}</div></td><td>${e.start_at?fmt(e.start_at)+' → '+fmt(e.end_at):'-'}</td><td>${e.duration_minutes}</td><td><span class="tag ${e.status=='published'?'live':e.status=='closed'?'end':''}">${e.status}</span></td><td>${e.status=='draft'?`<button data-p="${e.id}">Publish</button> <button class="r" data-x="${e.id}">Delete</button>`:e.status=='published'?`<button class="g" data-c="${e.id}">Close</button>`:''}</td></tr>`).join('')||'<tr><td colspan=5 class="muted">No exams yet.</td></tr>'}</table></div>`;
+ const pvu=()=>{const sub=[0,1,2,3].reduce((a,i)=>a+(+$('#pq'+i).value||0),0),r=parseKey($('#pk').value),m=r.items.filter(x=>x.type=='mcq').length,nu=r.items.length-m;
+  $('#pv').innerHTML='Parsed <b>'+r.items.length+'</b> answers ('+m+' MCQ, '+nu+' numerical). Questions per subject add up to <b>'+sub+'</b>.'+(r.items.length&&r.items.length!=sub?' <span class="wa">Counts do not match.</span>':'')+(r.errors.length?'<br><span class="wa">'+r.errors.slice(0,5).map(esc).join('<br>')+'</span>':'')};
+ ['pk','pq0','pq1','pq2','pq3'].forEach(i=>$('#'+i).oninput=pvu);pvu();
+ $('#pmk').onclick=()=>go(async()=>{const err=m=>$('#pe2').textContent=m;err('');
+  const t=$('#pt').value.trim(),s=new Date($('#ps').value),e=new Date($('#pe').value),d=+$('#pd').value,f=$('#pf').files[0],r=parseKey($('#pk').value);
+  const secs=['Physics','Chemistry','Mathematics','Biology'].map((x,i)=>({subject:x,count:+$('#pq'+i).value||0,marks_per_question:+$('#pm').value,negative_marks:+$('#pn').value,numerical_negative_marks:+$('#pz').value})).filter(x=>x.count>0),tot=secs.reduce((a,x)=>a+x.count,0);
+  if(!t||isNaN(s)||isNaN(e)||!d)return err('Enter title, open time, close time and duration.');if(e<=s)return err('Close time must be after open time.');
+  if(!f)return err('Choose the question paper PDF.');if(f.type!='application/pdf'&&!/\.pdf$/i.test(f.name))return err('The paper must be a PDF.');if(f.size>50*1024*1024)return err('PDF is larger than 50 MB.');
+  if(!tot)return err('Set the number of questions per subject.');if(r.errors.length)return err(r.errors[0]);if(r.items.length!=tot)return err('Answer key has '+r.items.length+' answers but you set '+tot+' questions.');
+  $('#pmk').disabled=true;$('#pmk').textContent='Uploading…';
+  const path=crypto.randomUUID()+'.pdf',up=await sb.storage.from('papers').upload(path,f,{contentType:'application/pdf'});
+  if(up.error){$('#pmk').disabled=false;$('#pmk').textContent='Create paper exam (draft)';throw new Error('Upload failed: '+up.error.message)}
+  try{await Q(sb.rpc('admin_save_paper_exam',{p:{title:t,exam_type:$('#pty').value,batch_id:$('#pb').value||null,start_at:s.toISOString(),end_at:e.toISOString(),duration_minutes:d,paper_path:path,sections:secs,key:r.items}}))}
+  catch(x){await sb.storage.from('papers').remove([path]);$('#pmk').disabled=false;$('#pmk').textContent='Create paper exam (draft)';throw x}
+  alert('Draft created with '+tot+' questions. Click Publish when ready.');aExams()});
+ $('#jp').onclick=()=>{$('#xy').value='JEE_MAIN';$('#xd').value=180;['sp','sc','sm'].forEach(i=>{$('#'+i+'m').value=20;$('#'+i+'n').value=5});$('#sbi'+'m').value=0;$('#sbi'+'n').value=0};
+ $('#mk').onclick=()=>go(async()=>{const subs=SUB.map(([s,i])=>{const m=+$('#'+i+'m').value||0,n=+$('#'+i+'n').value||0;return{subject:s,question_count:m+n,numerical_count:n,marks_per_question:+$('#xp').value,negative_marks:+$('#xn').value,numerical_negative_marks:+$('#xz').value}}).filter(x=>x.question_count>0);
+  const t=$('#xt').value.trim(),s=new Date($('#xs').value),e=new Date($('#xe').value),d=+$('#xd').value;
+  if(!t||isNaN(s)||isNaN(e)||!d)throw new Error('Enter title, open time, close time and duration.');if(e<=s)throw new Error('Close time must be after open time.');if(!subs.length)throw new Error('Set the number of questions for at least one subject.');
+  const ty=$('#xy').value,id=await Q(sb.rpc('admin_save_exam',{p:{title:t,exam_type:ty,batch_id:$('#xb').value||null,start_at:s.toISOString(),end_at:e.toISOString(),duration_minutes:d,instructions:'',shuffle_questions:true,subjects:subs}}));
+  await Q(sb.from('exams').update({show_result_immediately:false}).eq('id',id));
+  let qq=sb.from('questions').select('id,subject,question_type').eq('is_active',true).in('subject',subs.map(x=>x.subject));if(ty=='JEE_MAIN')qq=qq.in('exam_type',['JEE','BOTH']);if(ty=='NEET')qq=qq.in('exam_type',['NEET','BOTH']);
+  const pool=await Q(qq);await Q(sb.rpc('admin_set_exam_questions',{p_exam_id:id,p_question_ids:pool.map(x=>x.id)}));
+  const nn=pool.filter(x=>x.question_type=='numerical').length;alert('Draft created. Pool: '+(pool.length-nn)+' MCQ + '+nn+' numerical questions. Click Publish when ready (it checks every subject has enough of each type).');aExams()});
+ document.querySelectorAll('[data-p]').forEach(b=>b.onclick=()=>go(async()=>{await Q(sb.from('exams').update({status:'published'}).eq('id',b.dataset.p));aExams()}));
+ document.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>go(async()=>{if(!confirm('Close this exam? Results will be released to students.'))return;await Q(sb.from('exams').update({status:'closed'}).eq('id',b.dataset.c));aExams()}));
+ document.querySelectorAll('[data-x]').forEach(b=>b.onclick=()=>go(async()=>{if(!confirm('Delete this draft?'))return;const pe=ex.find(z=>z.id==b.dataset.x);await Q(sb.from('exams').delete().eq('id',b.dataset.x));if(pe&&pe.paper_path)await sb.storage.from('papers').remove([pe.paper_path]);aExams()}))}
+async function aRes(){
+ const ex=await Q(sb.from('exams').select('id,title,status,paper_path').in('status',['published','closed']).order('start_at',{ascending:false}));
+ if(!ex.length){$('#v').innerHTML='<div class="card muted">Publish an exam first.</div>';return}
+ const id=window._rx&&ex.find(e=>e.id==window._rx)?window._rx:ex[0].id;
+ const[rs,pend,eq]=await Promise.all([Q(sb.from('results').select('score,total_marks,correct_count,incorrect_count,unattempted_count,rank,students(roll_number,full_name)').eq('exam_id',id).order('score',{ascending:false})),sb.from('exam_attempts').select('id',{count:'exact',head:true}).eq('exam_id',id).eq('status','in_progress'),Q(sb.from('exam_questions').select('question_id,position').eq('exam_id',id).order('position'))]);
+ const ks=eq.length?await Q(sb.from('questions').select('id,subject,question_type,question_text,option_a,option_b,option_c,option_d,correct_answer,numerical_answer,numeric_tolerance').in('id',eq.map(x=>x.question_id))):[];
+ const km=Object.fromEntries(ks.map(k=>[k.id,k]));
+ $('#v').innerHTML=`<div class="card"><label>Exam</label><select id="rx">${ex.map(e=>`<option value="${e.id}" ${e.id==id?'selected':''}>${esc(e.title)} (${e.status})</option>`).join('')}</select>
+ <div class="row" style="align-items:center"><p class="muted" style="flex:3">${pend.count||0} attempt(s) still in progress. Students who closed the app are graded after their time ends — click the button after the exam ends.</p><button id="fz">Calculate results now</button></div>
+ <h3>Results</h3><table><tr><th>Rank</th><th>Student</th><th>Roll</th><th>Correct</th><th>Wrong</th><th>Skipped</th><th>Score</th></tr>${rs.map((r,i)=>`<tr><td>${r.rank||i+1}</td><td>${esc(r.students?.full_name)}</td><td>${esc(r.students?.roll_number)}</td><td class="ca">${r.correct_count}</td><td class="wa">${r.incorrect_count}</td><td>${r.unattempted_count}</td><td><b>${r.score}</b> / ${r.total_marks}</td></tr>`).join('')||'<tr><td colspan=7 class="muted">No submissions yet.</td></tr>'}</table></div>
+ <div class="card"><h3>Answer key (question pool)</h3><table><tr><th>#</th><th>Subject</th><th>Question</th><th>Correct</th></tr>${eq.map((x,i)=>{const k=km[x.question_id];return k?`<tr><td>${i+1}</td><td>${k.subject}</td><td style="white-space:pre-wrap">${esc(k.question_text)}</td><td class="ca">${k.question_type=='numerical'?esc(k.numerical_answer):esc(k.correct_answer)+(k['option_'+String(k.correct_answer).toLowerCase()]?'. '+esc(k['option_'+String(k.correct_answer).toLowerCase()]):'')}</td></tr>`:''}).join('')}</table></div>`;
+ const cx=ex.find(e=>e.id==id);
+ if(cx&&cx.paper_path){const kt=eq.map(x=>{const k=km[x.question_id];if(!k)return'';return x.position+'-'+(k.question_type=='numerical'?k.numerical_answer+(+k.numeric_tolerance>0?'±'+k.numeric_tolerance:''):k.correct_answer)}).join(' ');
+  $('#v').insertAdjacentHTML('beforeend','<div class="card"><h3>Fix answer key &amp; re-grade</h3><p class="muted">Found a wrong answer? Edit it below. All submitted attempts are graded again and ranks are updated.</p><textarea id="fk" class="fkey">'+esc(kt)+'</textarea><div class="err" id="fe"></div><button id="fkb">Update key &amp; re-grade all</button></div>');
+  $('#fkb').onclick=()=>go(async()=>{const r=parseKey($('#fk').value);if(r.errors.length)throw new Error(r.errors[0]);if(!confirm('Update the key and re-grade all submitted attempts?'))return;const n=await Q(sb.rpc('admin_update_paper_key',{p_exam_id:id,p_key:r.items}));alert('Key updated. '+n+' attempt(s) re-graded.');window._rx=id;aRes()})}
+ $('#rx').onchange=e=>{window._rx=e.target.value;aRes()};
+ $('#fz').onclick=()=>go(async()=>{window._rx=id;const n=await Q(sb.rpc('admin_finalize_expired',{p_exam_id:id}));alert(n+' expired attempt(s) graded.');aRes()})}
+// ---- Student ----
+async function stu(){
+ let[ex,at,rs]=await Promise.all([Q(sb.from('exams').select('id,title,exam_type,start_at,end_at,duration_minutes,status,paper_path').order('start_at',{ascending:false})),Q(sb.from('exam_attempts').select('id,exam_id,status,expires_at')),Q(sb.from('results').select('exam_id,score,total_marks,correct_count,incorrect_count,unattempted_count,rank'))]);
+ const late=at.filter(a=>a.status=='in_progress'&&Date.now()>=Date.parse(a.expires_at));
+ if(late.length){for(const a of late)try{await Q(sb.rpc('finish_attempt',{p_attempt_id:a.id}))}catch(e){}return stu()}
+ const now=Date.now();
+ $('#app').innerHTML=`<h2>Your tests</h2>${ex.map(e=>{const a=at.find(x=>x.exam_id==e.id),r=rs.find(x=>x.exam_id==e.id),s=Date.parse(e.start_at),en=Date.parse(e.end_at),over=now>=en||e.status=='closed';
+  const act=a&&a.status!='in_progress'?(over?`<button data-rv="${a.id}" data-t="${esc(e.title)}">Answer key (PDF)</button>`:`<span class="tag">Submitted — answer key opens ${fmt(en)}</span>`)+(r?` <span class="tag live">Score ${r.score}/${r.total_marks}</span>`:''):now<s?'<span class="muted">Opens at start time</span>':(now<en||a)&&e.status=='published'?`<button data-s="${e.id}">${a?'Resume test':'Start test'}</button>`:'<span class="muted">Closed</span>';
+  return`<div class="card"><div class="row" style="align-items:center"><div style="flex:3"><h3>${esc(e.title)}</h3><div class="muted">${e.exam_type.replace('_',' ')} · ${e.duration_minutes} min · ${fmt(s)} → ${fmt(en)}</div></div><div>${act}</div></div></div>`}).join('')||'<div class="card muted">No tests assigned yet.</div>'}`;
+ document.querySelectorAll('[data-s]').forEach(b=>b.onclick=()=>go(()=>runExam(ex.find(e=>e.id==b.dataset.s))));
+ document.querySelectorAll('[data-rv]').forEach(b=>b.onclick=()=>go(()=>review(b.dataset.rv,b.dataset.t)))}
+async function runExam(ex){
+ const att=await Q(sb.rpc('start_attempt',{p_exam_id:ex.id}));if(att.status!='in_progress')return stu();
+ const[qs,sv]=await Promise.all([Q(sb.rpc('get_attempt_questions',{p_attempt_id:att.id})),Q(sb.from('attempt_answers').select('question_id,selected_options,numerical_answer').eq('attempt_id',att.id))]);
+ const A={};sv.forEach(r=>{if(r.numerical_answer!=null)A[r.question_id]={n:r.numerical_answer};else if(r.selected_options&&r.selected_options.length)A[r.question_id]=r.selected_options});
+ const exp=Date.parse(att.expires_at);cur=0;let busy=false,done=false;
+ const save=(qid,sel,n)=>sb.from('attempt_answers').upsert({attempt_id:att.id,question_id:qid,selected_options:sel,numerical_answer:n,answered_at:new Date().toISOString()},{onConflict:'attempt_id,question_id'}).then(r=>{if(r.error){const e=$('#se');if(e)e.textContent='Could not save last answer — check your internet.'}});
+ const fin=async(manual)=>{if(busy||done)return;busy=true;try{await Q(sb.rpc('finish_attempt',{p_attempt_id:att.id}));done=true;clearInterval(timer);timer=null;if(!manual)alert('Time is up. Your test has been submitted.');stu()}catch(e){busy=false;if(manual)alert(e.message)}};
+ const ans=q=>{const v=A[q.question_id];return v&&(Array.isArray(v)?v.length:v.n!=null)};
+ const draw=()=>{const q=qs[cur],left=exp-Date.now(),m=Math.max(0,Math.floor(left/60000)),s=Math.max(0,Math.floor(left/1000)%60),v=A[q.question_id];
+  $('#app').innerHTML=`<div class="exam"><div class="card"><div class="row" style="align-items:center"><h3 style="flex:3">${esc(ex.title)} — Q${cur+1}/${qs.length} <span class="tag">${esc(q.subject)}</span> ${q.question_type=='numerical'?'<span class="tag end">Numerical</span>':''}</h3><div class="timer" id="tm">${m}:${String(s).padStart(2,'0')}</div></div>
+  <p style="font-size:17px;white-space:pre-wrap">${esc(q.question_text)}</p>${q.question_image_url?`<img src="${esc(q.question_image_url)}" alt="" style="max-width:100%">`:''}
+  ${q.question_type=='numerical'?`<label>Your answer (number)</label><input id="nm" type="number" step="any" value="${v&&v.n!=null?esc(v.n):''}">`:(q.options||[]).map(o=>`<label class="opt ${Array.isArray(v)&&v.includes(o.key)?'s':''}"><input type="${q.question_type=='mcq_multi'?'checkbox':'radio'}" name="o" data-k="${esc(o.key)}" ${Array.isArray(v)&&v.includes(o.key)?'checked':''} style="width:auto;margin-right:8px"> ${esc(o.key)}. ${esc(o.text)}</label>`).join('')}
+  <div class="err" id="se"></div><div class="row" style="margin-top:12px"><button class="g" id="pv" ${cur?'':'disabled'}>Previous</button><button class="g" id="cl">Clear answer</button><button id="nx" ${cur<qs.length-1?'':'disabled'}>Next</button></div></div>
+  <div class="card"><b>Question palette</b><div class="pal" style="margin:10px 0">${qs.map((x,i)=>`<button data-q="${i}" class="${ans(x)?'a':''} ${i==cur?'c':''}">${i+1}</button>`).join('')}</div>
+  <button id="sb" style="width:100%" ${left<=0?'':'disabled'}>${left<=0?'Submit test':'Submit (unlocks when time ends)'}</button><p class="muted">The test cannot be submitted or closed before the end time. It auto-submits at 0:00. Answers save as you go.</p></div></div>`;
+  document.querySelectorAll('[name=o]').forEach(r=>r.onchange=()=>{const k=r.dataset.k;let a;if(q.question_type=='mcq_multi'){a=(Array.isArray(v)?v.slice():[]);a.includes(k)?a.splice(a.indexOf(k),1):a.push(k)}else a=[k];A[q.question_id]=a;save(q.question_id,a,null);draw()});
+  if($('#nm'))$('#nm').onchange=e=>{const t=e.target.value;if(t===''){delete A[q.question_id];save(q.question_id,[],null)}else{A[q.question_id]={n:+t};save(q.question_id,[],+t)}draw()};
+  $('#cl').onclick=()=>{delete A[q.question_id];save(q.question_id,[],null);draw()};$('#pv').onclick=()=>{cur--;draw()};$('#nx').onclick=()=>{cur++;draw()};
+  document.querySelectorAll('[data-q]').forEach(b=>b.onclick=()=>{cur=+b.dataset.q;draw()});$('#sb').onclick=()=>fin(true)};
+ const drawPaper=async()=>{
+  const grp={},T={};qs.forEach((q,i)=>{T[q.question_id]=q.question_type;(grp[q.subject]=grp[q.subject]||[]).push([q,i+1])});
+  const cnt=()=>qs.filter(ans).length;
+  const row=([q,n])=>{const v=A[q.question_id];return q.question_type=='numerical'?`<div class="orow"><b>Q${n}</b><input type="number" step="any" data-nq="${esc(q.question_id)}" value="${v&&v.n!=null?esc(v.n):''}" placeholder="number" style="width:130px;margin:0"></div>`
+   :`<div class="orow" data-r="${esc(q.question_id)}"><b>Q${n}</b>${['A','B','C','D'].map(k=>`<button class="bub ${Array.isArray(v)&&v.includes(k)?'on':''}" data-k="${k}">${k}</button>`).join('')}</div>`};
+  $('#app').innerHTML=`<div class="card" style="display:flex;gap:12px;align-items:center;flex-wrap:wrap"><h3 style="flex:1;margin:0">${esc(ex.title)}</h3><div class="timer" id="tm">…</div></div>
+  <div class="ptabs"><button class="g on" id="tp">Question paper</button><button class="g" id="ts">Answer sheet (<span class="ac">${cnt()}</span>/${qs.length})</button></div>
+  <div class="pp" id="pp"><div class="card pdfp" id="pdf"><div class="muted" id="pl">Loading question paper…</div></div>
+  <div class="card oms" id="om"><b>Answer sheet</b> <span class="muted">(<span class="ac">${cnt()}</span>/${qs.length} answered)</span>${Object.entries(grp).map(([s,a])=>`<h4 style="margin:14px 0 4px">${esc(s)}</h4>${a.map(row).join('')}`).join('')}
+  <button id="sb" style="width:100%;margin-top:14px" disabled>Submit (unlocks when time ends)</button><div class="err" id="se"></div><p class="muted">Tap a bubble again to clear it. Answers save as you go. The test cannot be submitted early; it auto-submits at 0:00.</p></div></div>`;
+  const setTab=sh=>{$('#pp').classList.toggle('sh',sh);$('#ts').classList.toggle('on',sh);$('#tp').classList.toggle('on',!sh)};
+  $('#tp').onclick=()=>setTab(false);$('#ts').onclick=()=>setTab(true);
+  const upd=()=>document.querySelectorAll('.ac').forEach(e=>e.textContent=cnt());
+  $('#om').onclick=e=>{const b=e.target.closest('.bub');if(!b)return;const r=b.closest('[data-r]'),qid=r.dataset.r,k=b.dataset.k;let a=Array.isArray(A[qid])?A[qid].slice():[];
+   if(T[qid]=='mcq_multi')a=a.includes(k)?a.filter(x=>x!=k):a.concat(k).sort();else a=a.includes(k)?[]:[k];
+   if(a.length)A[qid]=a;else delete A[qid];save(qid,a,null);r.querySelectorAll('.bub').forEach(x=>x.classList.toggle('on',a.includes(x.dataset.k)));upd()};
+  $('#om').onchange=e=>{const i=e.target.closest('[data-nq]');if(!i)return;const qid=i.dataset.nq,t=i.value;if(t===''){delete A[qid];save(qid,[],null)}else{A[qid]={n:+t};save(qid,[],+t)}upd()};
+  $('#sb').onclick=()=>fin(true);
+  const box=$('#pdf');
+  try{if(!window.pdfjsLib)throw new Error('PDF viewer could not load. Check your internet connection and refresh.');
+   const{data:blob,error}=await sb.storage.from('papers').download(ex.paper_path);if(error)throw new Error(error.message);
+   const pdf=await pdfjsLib.getDocument({data:await blob.arrayBuffer()}).promise;box.innerHTML='';
+   for(let i=1;i<=pdf.numPages;i++){if(!document.body.contains(box))return;const pg=await pdf.getPage(i),w=Math.max(box.clientWidth-16,300),v0=pg.getViewport({scale:1}),sc=(w/v0.width)*Math.min(window.devicePixelRatio||1,2),vp=pg.getViewport({scale:sc}),c=document.createElement('canvas');
+    c.width=vp.width;c.height=vp.height;c.oncontextmenu=e=>e.preventDefault();box.appendChild(c);await pg.render({canvasContext:c.getContext('2d'),viewport:vp}).promise}}
+  catch(x){const l=$('#pl');if(l)l.innerHTML='<span class="wa">Could not load the question paper: '+esc(x.message)+'</span>';else box.insertAdjacentHTML('afterbegin','<div class="wa">Could not load the question paper: '+esc(x.message)+'</div>')}};
+ if(ex.paper_path)drawPaper();else draw();timer=setInterval(()=>{const left=exp-Date.now();if(left<=0){fin(false);return}const e=$('#tm');if(e)e.textContent=Math.floor(left/60000)+':'+String(Math.floor(left/1000)%60).padStart(2,'0')},1000)}
+async function review(attId,title){
+ const d=await Q(sb.rpc('get_attempt_review',{p_attempt_id:attId})),r=d.result,bd=r&&r.subject_breakdown||{};
+ const fx=v=>v==null?'-':(v>0?'+'+v:v);
+ const qh=d.questions.map(q=>{const num=q.type=='numerical',sel=q.selected||[],cor=q.correct||[];
+  const nopt=!num&&!(q.options||[]).length,body=nopt?`<div class="ro ${q.is_correct?'ok':sel.length?'no':''}">Your answer: <b>${sel.length?esc(sel.join(', ')):'Not attempted'}</b></div><div class="ro ok">Correct answer: <b>${esc(cor.join(', '))}</b></div>`:num?`<div class="ro ${q.is_correct?'ok':q.num_answer==null?'':'no'}">Your answer: <b>${q.num_answer==null?'Not attempted':esc(q.num_answer)}</b></div><div class="ro ok">Correct answer: <b>${esc(q.correct_num)}</b></div>`
+   :(q.options||[]).map(o=>{const c=cor.includes(o.key),m=sel.includes(o.key);return`<div class="ro ${c?'ok':m?'no':''}">${esc(o.key)}. ${esc(o.text)}${c?' &nbsp;✔ correct':''}${m?(c?' &nbsp;(your answer)':' &nbsp;✘ your answer'):''}</div>`}).join('')+(sel.length?'':'<div class="muted">Not attempted</div>');
+  return`<div class="qc"><div class="muted"><b>Q${q.n}</b> · ${esc(q.subject)} · ${num?'Numerical':'MCQ'} · Marks: <b>${fx(q.awarded)}</b></div><div style="white-space:pre-wrap;margin:6px 0">${esc(q.text)}</div>${q.image?`<img src="${esc(q.image)}" alt="" style="max-width:100%">`:''}${body}${q.explanation?`<div class="muted" style="margin-top:6px;white-space:pre-wrap"><b>Solution:</b> ${esc(q.explanation)}</div>`:''}</div>`}).join('');
+ $('#app').innerHTML=`<div class="noprint" style="margin-bottom:14px"><button class="g" id="bk">← Back</button> <button id="pr">Download PDF</button> <span class="muted">In the window that opens, choose “Save as PDF” as the printer.</span></div>
+ <div id="rv"><div class="phd"><img src="logo.png" alt=""><div><div style="font-size:24px;font-weight:800;color:var(--b)">National Academy</div><div class="muted">JEE · NEET · MHT-CET · Kalyan East, Maharashtra</div></div></div>
+ <h2>${esc(d.exam.title)} — Answer Key &amp; Solutions</h2>
+ <p><b>${esc(me.name)}</b>${r?` · Score <b>${r.score} / ${r.total_marks}</b> · Correct ${r.correct_count} · Wrong ${r.incorrect_count} · Skipped ${r.unattempted_count}`:''}</p>
+ ${Object.keys(bd).length?`<table><tr><th>Subject</th><th>Score</th><th>Correct</th><th>Wrong</th><th>Skipped</th></tr>${Object.entries(bd).map(([k,v])=>`<tr><td>${esc(k)}</td><td><b>${v.score}</b></td><td>${v.correct}</td><td>${v.incorrect}</td><td>${v.unattempted}</td></tr>`).join('')}</table>`:''}
+ <div style="margin-top:12px">${qh}</div></div><div class="pfoot">National Academy · Practice Like the Real Exam · ${esc(d.exam.title)}</div>`;
+ $('#bk').onclick=stu;
+ $('#pr').onclick=()=>{const t=document.title;document.title='National Academy - '+title+' - '+me.name+' - Answer Key';window.print();setTimeout(()=>document.title=t,1500)}}
+window.addEventListener('beforeunload',e=>{if(timer&&me&&me.role=='student'){e.preventDefault();e.returnValue=''}});
+boot();
+</script></body></html>
